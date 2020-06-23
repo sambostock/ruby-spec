@@ -28,7 +28,6 @@ CSAutoloadC
 CSAutoloadD
 CSV
 ChainedNextTest
-ChildClass
 ClassIdUnderAutoload
 ClassSpecDefineClass
 ClassSpecsKeywordWithSemicolon
@@ -135,7 +134,6 @@ OptParse
 OptionParser
 OrAndXorTest
 OtherCustomException
-ParentClass
 Pathname
 Person
 Prime

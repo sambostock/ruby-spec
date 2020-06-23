@@ -52,7 +52,6 @@ DefSpecNestedB
 DefSpecSingleton
 DefSpecsLambdaVisibility
 DefineMethodByProcClass
-DefineMethodSpecClass
 DefineSingletonMethodSpecClass
 Delegator
 DescArray

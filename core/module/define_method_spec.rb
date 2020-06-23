@@ -1,9 +1,6 @@
 require_relative '../../spec_helper'
 require_relative 'fixtures/classes'
 
-class DefineMethodSpecClass
-end
-
 describe "passed { |a, b = 1|  } creates a method that" do
   before :each do
     @klass = Class.new do
@@ -181,6 +178,8 @@ describe "Module#define_method" do
 
     o = DefineMethodSpecClass.new
     o.test1.should == o.another_test
+
+    Object.send(:remove_const, :DefineMethodSpecClass)
   end
 
   it "calls #method_added after the method is added to the Module" do

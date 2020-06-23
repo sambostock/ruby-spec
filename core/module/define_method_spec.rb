@@ -410,7 +410,7 @@ describe "Module#define_method" do
 
   it "raises a TypeError when an UnboundMethod from one class is defined on an unrelated class" do
     -> {
-      DestinationClass = Class.new {
+      Class.new {
         define_method :bar, ModuleSpecs::InstanceMeth.instance_method(:foo)
       }
     }.should raise_error(TypeError, /bind argument must be a subclass of ModuleSpecs::InstanceMeth/)

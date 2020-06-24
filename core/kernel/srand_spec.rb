@@ -19,7 +19,7 @@ describe "Kernel.srand" do
   end
 
   it "defaults number to a random value" do
-    -> { srand }.should_not raise_error
+    srand
     srand.should_not == 0
   end
 

@@ -52,9 +52,7 @@ describe "Time#zone" do
     end
 
     it "doesn't raise errors for a Time with a fixed offset" do
-      -> {
-        Time.new(2001, 1, 1, 0, 0, 0, "+05:00").zone
-      }.should_not raise_error
+      Time.new(2001, 1, 1, 0, 0, 0, "+05:00").zone
     end
   end
 

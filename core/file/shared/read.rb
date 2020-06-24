@@ -9,7 +9,7 @@ describe :file_read_directory, shared: true do
 
   platform_is :freebsd, :netbsd do
     it "does not raises any exception when passed a path that is a directory" do
-      -> { @object.send(@method, ".") }.should_not raise_error
+      @object.send(@method, ".")
     end
   end
 end

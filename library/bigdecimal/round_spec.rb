@@ -223,9 +223,9 @@ describe "BigDecimal#round" do
   end
 
   it 'do not raise exception, if self is special value and precision is given' do
-    -> { BigDecimal('NaN').round(2) }.should_not raise_error(FloatDomainError)
-    -> { BigDecimal('Infinity').round(2) }.should_not raise_error(FloatDomainError)
-    -> { BigDecimal('-Infinity').round(2) }.should_not raise_error(FloatDomainError)
+    BigDecimal('NaN').round(2)
+    BigDecimal('Infinity').round(2)
+    BigDecimal('-Infinity').round(2)
   end
 
   it "raise for a non-existent round mode" do

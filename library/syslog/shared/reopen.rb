@@ -10,7 +10,7 @@ describe :syslog_reopen, shared: true do
 
     it "reopens the log" do
       Syslog.open
-      -> { Syslog.send(@method)}.should_not raise_error
+      Syslog.send(@method)
       Syslog.opened?.should be_true
       Syslog.close
     end

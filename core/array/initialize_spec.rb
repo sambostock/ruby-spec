@@ -53,7 +53,7 @@ describe "Array#initialize with no arguments" do
   end
 
   it "does not use the given block" do
-    ->{ [1, 2, 3].send(:initialize) { raise } }.should_not raise_error
+    [1, 2, 3].send(:initialize) { raise }
   end
 end
 
@@ -64,7 +64,7 @@ describe "Array#initialize with (array)" do
   end
 
   it "does not use the given block" do
-    ->{ [1, 2, 3].send(:initialize) { raise } }.should_not raise_error
+    [1, 2, 3].send(:initialize) { raise }
   end
 
   it "calls #to_ary to convert the value to an array" do

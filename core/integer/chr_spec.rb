@@ -150,7 +150,7 @@ describe "Integer#chr with an encoding argument" do
   end
 
   it "accepts a String as an argument" do
-    -> { 0xA4A2.chr('euc-jp') }.should_not raise_error
+    0xA4A2.chr('euc-jp')
   end
 
   it "converts a String to an Encoding as Encoding.find does" do

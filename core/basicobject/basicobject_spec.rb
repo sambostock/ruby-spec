@@ -85,7 +85,7 @@ describe "BasicObject subclass" do
 
   describe "BasicObject references" do
     it "can refer to BasicObject from within itself" do
-      -> { BasicObject::BasicObject }.should_not raise_error
+      BasicObject::BasicObject
     end
   end
 end

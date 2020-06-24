@@ -25,7 +25,7 @@ describe "BasicObject#instance_exec" do
   end
 
   it "accepts arguments with a block" do
-    -> { "hola".instance_exec(4, 5) { |a,b| a + b } }.should_not raise_error
+    "hola".instance_exec(4, 5) { |a,b| a + b }
   end
 
   it "doesn't pass self to the block as an argument" do

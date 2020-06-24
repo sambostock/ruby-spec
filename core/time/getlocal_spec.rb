@@ -116,9 +116,7 @@ describe "Time#getlocal" do
           time
         end
 
-        -> {
-          Time.utc(2000, 1, 1, 12, 0, 0).getlocal(zone).should be_kind_of(Time)
-        }.should_not raise_error
+        Time.utc(2000, 1, 1, 12, 0, 0).getlocal(zone).should be_kind_of(Time)
       end
 
       it "raises TypeError if timezone does not implement #utc_to_local method" do
@@ -138,9 +136,7 @@ describe "Time#getlocal" do
           time
         end
 
-        -> {
-          Time.utc(2000, 1, 1, 12, 0, 0).getlocal(zone).should be_kind_of(Time)
-        }.should_not raise_error
+        Time.utc(2000, 1, 1, 12, 0, 0).getlocal(zone).should be_kind_of(Time)
       end
 
       context "subject's class implements .find_timezone method" do

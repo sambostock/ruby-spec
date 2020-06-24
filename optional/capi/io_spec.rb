@@ -141,8 +141,7 @@ describe "C-API IO function" do
 
   describe "rb_io_check_closed" do
     it "does not raise an exception if the IO is not closed" do
-      # The MRI function is void, so we use should_not raise_error
-      -> { @o.rb_io_check_closed(@io) }.should_not raise_error
+      @o.rb_io_check_closed(@io)
     end
 
     it "raises an error if the IO is closed" do
@@ -165,7 +164,7 @@ describe "C-API IO function" do
   # object is frozen, *not* if it's tainted.
   describe "rb_io_taint_check" do
     it "does not raise an exception if the IO is not frozen" do
-      -> { @o.rb_io_taint_check(@io) }.should_not raise_error
+      @o.rb_io_taint_check(@io)
     end
 
     it "raises an exception if the IO is frozen" do
@@ -215,12 +214,11 @@ describe "C-API IO function" do
 
   describe "rb_io_check_readable" do
     it "does not raise an exception if the IO is opened for reading" do
-      # The MRI function is void, so we use should_not raise_error
-      -> { @o.rb_io_check_readable(@r_io) }.should_not raise_error
+      @o.rb_io_check_readable(@r_io)
     end
 
     it "does not raise an exception if the IO is opened for read and write" do
-      -> { @o.rb_io_check_readable(@rw_io) }.should_not raise_error
+      @o.rb_io_check_readable(@rw_io)
     end
 
     it "raises an IOError if the IO is not opened for reading" do
@@ -231,12 +229,11 @@ describe "C-API IO function" do
 
   describe "rb_io_check_writable" do
     it "does not raise an exception if the IO is opened for writing" do
-      # The MRI function is void, so we use should_not raise_error
-      -> { @o.rb_io_check_writable(@w_io) }.should_not raise_error
+      @o.rb_io_check_writable(@w_io)
     end
 
     it "does not raise an exception if the IO is opened for read and write" do
-      -> { @o.rb_io_check_writable(@rw_io) }.should_not raise_error
+      @o.rb_io_check_writable(@rw_io)
     end
 
     it "raises an IOError if the IO is not opened for reading" do

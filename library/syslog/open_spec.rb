@@ -77,10 +77,8 @@ platform_is_not :windows do
         -> {
           Syslog.open
         }.should raise_error(RuntimeError, /syslog already open/)
-        -> {
-          Syslog.close
-          Syslog.open
-        }.should_not raise_error
+        Syslog.close
+        Syslog.open
         Syslog.close
       end
     end

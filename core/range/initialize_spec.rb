@@ -10,11 +10,11 @@ describe "Range#initialize" do
   end
 
   it "initializes correctly the Range object when given 2 arguments" do
-    -> { @range.send(:initialize, 0, 1) }.should_not raise_error
+    @range.send(:initialize, 0, 1)
   end
 
   it "initializes correctly the Range object when given 3 arguments" do
-    -> { @range.send(:initialize, 0, 1, true) }.should_not raise_error
+    @range.send(:initialize, 0, 1, true)
   end
 
   it "raises an ArgumentError if passed without or with only one argument" do

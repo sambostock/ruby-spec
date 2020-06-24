@@ -35,7 +35,7 @@ describe "IO#close" do
     other_io = IO.new(@io.fileno)
     other_io.autoclose = false
     other_io.close
-    -> { @io.write "data" }.should_not raise_error(IOError)
+    @io.write "data"
   end
 
   it "does nothing if already closed" do

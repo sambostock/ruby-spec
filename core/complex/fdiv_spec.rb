@@ -2,15 +2,15 @@ require_relative '../../spec_helper'
 
 describe "Complex#fdiv" do
   it "accepts a numeric argument" do
-    -> { Complex(20).fdiv(2) }.should_not raise_error(TypeError)
-    -> { Complex(20).fdiv(2.0) }.should_not raise_error(TypeError)
-    -> { Complex(20).fdiv(bignum_value) }.should_not raise_error(TypeError)
+    Complex(20).fdiv(2)
+    Complex(20).fdiv(2.0)
+    Complex(20).fdiv(bignum_value)
   end
 
   it "accepts a negative numeric argument" do
-    -> { Complex(20).fdiv(-2) }.should_not raise_error(TypeError)
-    -> { Complex(20).fdiv(-2.0) }.should_not raise_error(TypeError)
-    -> { Complex(20).fdiv(-bignum_value) }.should_not raise_error(TypeError)
+    Complex(20).fdiv(-2)
+    Complex(20).fdiv(-2.0)
+    Complex(20).fdiv(-bignum_value)
   end
 
   it "raises a TypeError if passed a non-numeric argument" do

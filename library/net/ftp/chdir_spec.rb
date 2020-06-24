@@ -29,7 +29,7 @@ describe "Net::FTP#chdir" do
 
     it "does not raise a Net::FTPPermError when the response code is 500" do
       @server.should_receive(:cdup).and_respond("500 Syntax error, command unrecognized.")
-      -> { @ftp.chdir("..") }.should_not raise_error(Net::FTPPermError)
+      @ftp.chdir("..")
     end
 
     it "raises a Net::FTPPermError when the response code is 501" do

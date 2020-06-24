@@ -101,9 +101,7 @@ describe "Kernel.lambda" do
       l.call(1)
     }.should raise_error(ArgumentError)
 
-    lambda {
-      l.call(1,2)
-    }.should_not raise_error(ArgumentError)
+    l.call(1,2)
   end
 
   it "returns from the lambda itself, not the creation site of the lambda" do

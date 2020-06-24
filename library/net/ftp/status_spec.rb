@@ -32,12 +32,12 @@ describe "Net::FTP#status" do
 
   it "does not raise an error when the response code is 212" do
     @server.should_receive(:stat).and_respond("212 Directory status.")
-    -> { @ftp.status }.should_not raise_error
+    @ftp.status
   end
 
   it "does not raise an error when the response code is 213" do
     @server.should_receive(:stat).and_respond("213 File status.")
-    -> { @ftp.status }.should_not raise_error
+    @ftp.status
   end
 
   it "raises a Net::FTPPermError when the response code is 500" do

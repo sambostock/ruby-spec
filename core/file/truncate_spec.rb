@@ -150,7 +150,7 @@ describe "File#truncate" do
 
   it "raises an ArgumentError if not passed one argument" do
     -> { @file.truncate        }.should raise_error(ArgumentError)
-    -> { @file.truncate(1) }.should_not raise_error(ArgumentError)
+    @file.truncate(1)
   end
 
   platform_is_not :netbsd do

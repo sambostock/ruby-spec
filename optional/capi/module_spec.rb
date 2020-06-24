@@ -328,7 +328,7 @@ describe "CApiModule" do
     end
 
     it "does not raise exceptions when passed a missing name" do
-      -> { @m.rb_undef_method @class, "not_exist" }.should_not raise_error
+      @m.rb_undef_method @class, "not_exist"
     end
 
     describe "when given a frozen Class" do

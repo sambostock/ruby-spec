@@ -723,10 +723,8 @@ describe "String#%" do
       (format % "0b1101").should == (format % Kernel.Integer("0b1101"))
       (format % "0b1101_0000").should == (format % Kernel.Integer("0b1101_0000"))
       (format % "0777").should == (format % Kernel.Integer("0777"))
-      -> {
-        # see [ruby-core:14139] for more details
-        (format % "0777").should == (format % Kernel.Integer("0777"))
-      }.should_not raise_error(ArgumentError)
+      # see [ruby-core:14139] for more details
+      (format % "0777").should == (format % Kernel.Integer("0777"))
 
       -> { format % "0__7_7_7" }.should raise_error(ArgumentError)
 

@@ -462,7 +462,7 @@ describe "Range#step" do
           obj = mock("Range#step non-comparable")
           obj.should_receive(:<=>).with(obj).and_return(1)
           enum = (obj..obj).step
-          -> { enum.size }.should_not raise_error
+          enum.size
           enum.size.should == nil
         end
       end

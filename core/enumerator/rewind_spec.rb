@@ -49,7 +49,7 @@ describe "Enumerator#rewind" do
     obj = mock('rewinder')
     enum = obj.to_enum
     obj.should_receive(:each).at_most(1)
-    -> { enum.rewind.should == enum }.should_not raise_error
+    enum.rewind.should == enum
   end
 end
 

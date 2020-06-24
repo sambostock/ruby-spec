@@ -232,7 +232,7 @@ describe :file_fnmatch, shared: true do
   it "does not raise a TypeError if the third argument can be coerced to an Integer" do
     flags = mock("flags")
     flags.should_receive(:to_int).and_return(10)
-    -> { File.send(@method, "*/place", "path/to/file", flags) }.should_not raise_error
+    File.send(@method, "*/place", "path/to/file", flags)
   end
 
   it "matches multibyte characters" do

@@ -140,9 +140,7 @@ ruby_version_is "2.6" do
         time
       end
 
-      -> {
-        Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
-      }.should_not raise_error
+      Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
     end
 
     it "raises TypeError if timezone does not implement #local_to_utc method" do
@@ -162,9 +160,7 @@ ruby_version_is "2.6" do
         time
       end
 
-      -> {
-        Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
-      }.should_not raise_error
+      Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
     end
 
     # The result also should be a Time or Time-like object (not necessary to be the same class)
@@ -176,10 +172,8 @@ ruby_version_is "2.6" do
           Time.utc(t.year, t.mon, t.day, t.hour - 1, t.min, t.sec)
         end
 
-        -> {
-          Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
-          Time.new(2000, 1, 1, 12, 0, 0, zone).utc_offset.should == 60*60
-        }.should_not raise_error
+        Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
+        Time.new(2000, 1, 1, 12, 0, 0, zone).utc_offset.should == 60*60
       end
 
       it "could be Time subclass instance" do
@@ -188,10 +182,8 @@ ruby_version_is "2.6" do
           Class.new(Time).utc(t.year, t.mon, t.day, t.hour - 1, t.min, t.sec)
         end
 
-        -> {
-          Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
-          Time.new(2000, 1, 1, 12, 0, 0, zone).utc_offset.should == 60*60
-        }.should_not raise_error
+        Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
+        Time.new(2000, 1, 1, 12, 0, 0, zone).utc_offset.should == 60*60
       end
 
       it "could be any object with #to_i method" do
@@ -200,10 +192,8 @@ ruby_version_is "2.6" do
           Struct.new(:to_i).new(time.to_i - 60*60)
         end
 
-        -> {
-          Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
-          Time.new(2000, 1, 1, 12, 0, 0, zone).utc_offset.should == 60*60
-        }.should_not raise_error
+        Time.new(2000, 1, 1, 12, 0, 0, zone).should be_kind_of(Time)
+        Time.new(2000, 1, 1, 12, 0, 0, zone).utc_offset.should == 60*60
       end
 
       it "could have any #zone and #utc_offset because they are ignored" do

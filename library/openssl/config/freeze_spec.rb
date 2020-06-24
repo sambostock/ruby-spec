@@ -9,9 +9,7 @@ version_is(OpenSSL::VERSION, ""..."2.2") do
 
     it "freezes" do
       c = OpenSSL::Config.new
-      -> {
-        c['foo'] = [ ['key', 'value'] ]
-      }.should_not raise_error
+      c['foo'] = [ ['key', 'value'] ]
       c.freeze
       c.frozen?.should be_true
       -> {

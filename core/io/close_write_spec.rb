@@ -27,7 +27,7 @@ describe "IO#close_write" do
   it "allows subsequent invocation of close" do
     @io.close_write
 
-    -> { @io.close }.should_not raise_error
+    @io.close
   end
 
   it "raises an IOError if the stream is readable and not duplexed" do

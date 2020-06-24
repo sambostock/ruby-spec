@@ -52,10 +52,8 @@ describe "CApiGCSpecs" do
   describe "rb_gc_adjust_memory_usage" do
     # Just check that it does not throw, as it seems hard to observe any effect
     it "adjusts the amount of registered external memory" do
-      -> {
-        @f.rb_gc_adjust_memory_usage(8)
-        @f.rb_gc_adjust_memory_usage(-8)
-      }.should_not raise_error
+      @f.rb_gc_adjust_memory_usage(8)
+      @f.rb_gc_adjust_memory_usage(-8)
     end
   end
 

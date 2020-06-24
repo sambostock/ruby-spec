@@ -28,7 +28,7 @@ describe "Net::FTP#acct" do
 
   it "does not raise any error when the response code is 230" do
     @server.should_receive(:acct).and_respond("230 User logged in, proceed.")
-    -> { @ftp.acct("my_account") }.should_not raise_error
+    @ftp.acct("my_account")
   end
 
   it "raises a Net::FTPPermError when the response code is 530" do

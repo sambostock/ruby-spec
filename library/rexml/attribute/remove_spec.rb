@@ -17,7 +17,7 @@ ruby_version_is ''...'2.8' do
     end
 
     it "does not anything if element has no parent" do
-      -> {@attr.remove}.should_not raise_error(Exception)
+      @attr.remove
     end
   end
 end

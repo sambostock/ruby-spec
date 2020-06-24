@@ -64,12 +64,10 @@ describe "Kernel.throw" do
   end
 
   it "can throw an object" do
-    -> {
-      obj = Object.new
-      catch obj do
-        throw obj
-      end
-    }.should_not raise_error(NameError)
+    obj = Object.new
+    catch obj do
+      throw obj
+    end
   end
 end
 

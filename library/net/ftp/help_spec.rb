@@ -36,12 +36,12 @@ describe "Net::FTP#help" do
 
   it "does not raise any error when the response code is 211" do
     @server.should_receive(:help).and_respond("211 System status, or system help reply.")
-    -> { @ftp.help }.should_not raise_error
+    @ftp.help
   end
 
   it "does not raise any error when the response code is 214" do
     @server.should_receive(:help).and_respond("214 Help message.")
-    -> { @ftp.help }.should_not raise_error
+    @ftp.help
   end
 
   it "raises a Net::FTPPermError when the response code is 500" do

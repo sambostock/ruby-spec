@@ -44,7 +44,7 @@ describe "Module#include" do
   end
 
   it "does not raise a TypeError when the argument is an instance of a subclass of Module" do
-    -> { ModuleSpecs::SubclassSpec.include(ModuleSpecs::Subclass.new) }.should_not raise_error(TypeError)
+    ModuleSpecs::SubclassSpec.include(ModuleSpecs::Subclass.new)
   end
 
   it "imports constants to modules and classes" do

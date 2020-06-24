@@ -652,9 +652,7 @@ describe "CApiObject" do
   describe "rb_obj_instance_eval" do
     it "evaluates the block in the object context, that includes private methods" do
       obj = ObjectTest
-      -> do
-        @o.rb_obj_instance_eval(obj) { include Kernel }
-      end.should_not raise_error(NoMethodError)
+      @o.rb_obj_instance_eval(obj) { include Kernel }
     end
   end
 
@@ -693,7 +691,7 @@ describe "CApiObject" do
 
     it "does nothing when object isn't frozen" do
       obj = ""
-      -> { @o.rb_check_frozen(obj) }.should_not raise_error(TypeError)
+      @o.rb_check_frozen(obj)
     end
   end
 

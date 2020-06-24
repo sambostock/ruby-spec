@@ -58,9 +58,7 @@ describe "Hash#default_proc=" do
 
   it "accepts a lambda with an arity of 2" do
     h = {}
-    -> do
-      h.default_proc = -> a, b { }
-    end.should_not raise_error(TypeError)
+    h.default_proc = -> a, b { }
   end
 
   it "raises a TypeError if passed a lambda with an arity other than 2" do

@@ -10,7 +10,7 @@ describe "Net::HTTPResponse#value" do
     -> { res.value }.should raise_error(Net::HTTPError)
 
     res = Net::HTTPSuccess.new("1.0", "2xx", "test response")
-    -> { res.value }.should_not raise_error(Net::HTTPError)
+    res.value
 
     res = Net::HTTPRedirection.new("1.0", "3xx", "test response")
     -> { res.value }.should raise_error(Net::HTTPRetriableError)

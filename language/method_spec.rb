@@ -1672,11 +1672,9 @@ describe "A method" do
         ruby
 
         options = {a: 1}.freeze
-        -> do
-          suppress_warning do
-            m(options).should == 1
-          end
-        end.should_not raise_error
+        suppress_warning do
+          m(options).should == 1
+        end
         options.should == {a: 1}
       end
     end

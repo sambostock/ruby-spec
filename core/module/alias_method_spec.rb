@@ -95,7 +95,7 @@ describe "Module#alias_method" do
 
   it "works on private module methods in a module that has been reopened" do
     ModuleSpecs::ReopeningModule.foo.should == true
-    -> { ModuleSpecs::ReopeningModule.foo2 }.should_not raise_error(NoMethodError)
+    ModuleSpecs::ReopeningModule.foo2
   end
 
   it "accesses a method defined on Object from Kernel" do

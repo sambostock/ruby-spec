@@ -13,7 +13,7 @@ describe "Socket#bind on SOCK_DGRAM socket" do
   end
 
   it "binds to a port" do
-    -> { @sock.bind(@sockaddr) }.should_not raise_error
+    @sock.bind(@sockaddr)
   end
 
   it "returns 0 if successful" do
@@ -54,7 +54,7 @@ describe "Socket#bind on SOCK_STREAM socket" do
   end
 
   it "binds to a port" do
-    -> { @sock.bind(@sockaddr) }.should_not raise_error
+    @sock.bind(@sockaddr)
   end
 
   it "returns 0 if successful" do

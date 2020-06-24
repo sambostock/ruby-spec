@@ -15,7 +15,7 @@ describe :dir_chroot_as_root, shared: true do
   end
 
   it "can be used to change the process' root directory" do
-    -> { Dir.send(@method, File.dirname(__FILE__)) }.should_not raise_error
+    Dir.send(@method, File.dirname(__FILE__))
     File.should.exist?("/#{File.basename(__FILE__)}")
   end
 

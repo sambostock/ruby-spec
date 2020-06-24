@@ -127,7 +127,7 @@ describe "Net::FTP#login" do
 
     it "does not raise an Error when the response code is 202" do
       @server.should_receive(:pass).and_respond("202 Command not implemented, superfluous at this site.")
-      -> { @ftp.login("rubyspec", "rocks", "account") }.should_not raise_error
+      @ftp.login("rubyspec", "rocks", "account")
     end
 
     it "raises a Net::FTPPermError when the response code is 500" do
@@ -164,7 +164,7 @@ describe "Net::FTP#login" do
 
     it "does not raise an Error when the response code is 202" do
       @server.should_receive(:acct).and_respond("202 Command not implemented, superfluous at this site.")
-      -> { @ftp.login("rubyspec", "rocks", "account") }.should_not raise_error
+      @ftp.login("rubyspec", "rocks", "account")
     end
 
     it "raises a Net::FTPPermError when the response code is 500" do

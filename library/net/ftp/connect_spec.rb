@@ -19,7 +19,7 @@ describe "Net::FTP#connect" do
   end
 
   it "tries to connect to the FTP Server on the given host and port" do
-    -> { @ftp.connect(@server.hostname, @server.server_port) }.should_not raise_error
+    @ftp.connect(@server.hostname, @server.server_port)
   end
 
   it "returns nil" do
@@ -34,7 +34,7 @@ describe "Net::FTP#connect" do
 
   it "does not raise any error when the response code is 220" do
     @server.connect_message = "220 Dummy FTP Server ready!"
-    -> { @ftp.connect(@server.hostname, @server.server_port) }.should_not raise_error
+    @ftp.connect(@server.hostname, @server.server_port)
   end
 
   it "raises a Net::FTPReplyError when the response code is 120" do

@@ -50,7 +50,7 @@ describe :fiber_resume, shared: true do
 
   it "accepts any number of arguments" do
     fiber = Fiber.new { |a| }
-    -> { fiber.send(@method, *(1..10).to_a) }.should_not raise_error
+    fiber.send(@method, *(1..10).to_a)
   end
 
   it "sets the block parameters to its arguments on the first invocation" do

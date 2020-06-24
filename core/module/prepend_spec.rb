@@ -41,7 +41,7 @@ describe "Module#prepend" do
   end
 
   it "does not raise a TypeError when the argument is an instance of a subclass of Module" do
-    -> { ModuleSpecs::SubclassSpec.prepend(ModuleSpecs::Subclass.new) }.should_not raise_error(TypeError)
+    ModuleSpecs::SubclassSpec.prepend(ModuleSpecs::Subclass.new)
   end
 
   it "imports constants" do

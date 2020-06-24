@@ -147,7 +147,7 @@ describe :regexp_new_string, shared: true do
     end
 
     it "does not raise a Regexp error if there is an escaped trailing backslash" do
-      -> { Regexp.send(@method, "\\\\") }.should_not raise_error(RegexpError)
+      Regexp.send(@method, "\\\\")
     end
 
     it "accepts a backspace followed by a character" do

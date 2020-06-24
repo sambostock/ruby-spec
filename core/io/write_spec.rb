@@ -21,7 +21,7 @@ describe "IO#write on a file" do
   end
 
   it "does not check if the file is writable if writing zero bytes" do
-    -> { @readonly_file.write("") }.should_not raise_error
+    @readonly_file.write("")
   end
 
   it "returns a length of 0 when writing a blank string" do

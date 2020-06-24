@@ -19,7 +19,7 @@ describe "Net::FTP#voidcmd" do
 
   it "sends the passed command to the server" do
     @server.should_receive(:help).and_respond("2xx Does not raise.")
-    -> { @ftp.voidcmd("HELP") }.should_not raise_error
+    @ftp.voidcmd("HELP")
   end
 
   it "returns nil" do

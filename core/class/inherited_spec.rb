@@ -92,10 +92,10 @@ describe "Class.inherited" do
     end
 
     class << top; private :inherited; end
-    -> { Class.new(top) }.should_not raise_error
+    Class.new(top)
 
     class << top; protected :inherited; end
-    -> { Class.new(top) }.should_not raise_error
+    Class.new(top)
   end
 
 end

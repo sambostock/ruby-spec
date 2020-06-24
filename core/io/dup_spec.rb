@@ -49,7 +49,7 @@ end
 
   it "allows closing the new IO without affecting the original" do
     @i.close
-    -> { @f.gets }.should_not raise_error(Exception)
+    @f.gets
 
     @i.should.closed?
     @f.should_not.closed?
@@ -57,7 +57,7 @@ end
 
   it "allows closing the original IO without affecting the new one" do
     @f.close
-    -> { @i.gets }.should_not raise_error(Exception)
+    @i.gets
 
     @i.should_not.closed?
     @f.should.closed?

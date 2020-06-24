@@ -33,13 +33,13 @@ describe "Kernel#taint" do
 
     it "no raises a RuntimeError on symbols" do
       v = :sym
-      -> { v.taint }.should_not raise_error(RuntimeError)
+      v.taint
       v.should_not.tainted?
     end
 
     it "no raises error on fixnum values" do
       [1].each do |v|
-        -> { v.taint }.should_not raise_error(RuntimeError)
+        v.taint
         v.should_not.tainted?
       end
     end

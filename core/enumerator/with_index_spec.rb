@@ -14,15 +14,11 @@ describe "Enumerator#with_index" do
   end
 
   it "accepts an optional argument when given a block" do
-    -> do
-      @enum.with_index(1) { |f| f}
-    end.should_not raise_error(ArgumentError)
+    @enum.with_index(1) { |f| f}
   end
 
   it "accepts an optional argument when not given a block" do
-    -> do
-      @enum.with_index(1)
-    end.should_not raise_error(ArgumentError)
+    @enum.with_index(1)
   end
 
   it "numbers indices from the given index when given an offset but no block" do

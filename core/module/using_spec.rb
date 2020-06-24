@@ -24,21 +24,17 @@ describe "Module#using" do
       end
     end
 
-    -> {
-      Module.new do
-        using refinement
-      end
-    }.should_not raise_error
+    Module.new do
+      using refinement
+    end
   end
 
   it "accepts module without refinements" do
     mod = Module.new
 
-    -> {
-      Module.new do
-        using mod
-      end
-    }.should_not raise_error
+    Module.new do
+      using mod
+    end
   end
 
   it "does not accept class" do

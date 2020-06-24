@@ -97,7 +97,7 @@ describe "Mutex#sleep" do
     m.lock
     times.each do |time|
       # just testing that sleep completes
-      -> {m.sleep(time)}.should_not raise_error
+      m.sleep(time)
     end
   end
 end

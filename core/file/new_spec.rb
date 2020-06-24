@@ -44,7 +44,7 @@ describe "File.new" do
     rm_r @file
     begin
       f = File.new(@file, "w", 0444)
-      -> { f.puts("test") }.should_not raise_error(IOError)
+      f.puts("test")
     ensure
       f.close
     end

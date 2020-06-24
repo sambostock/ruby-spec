@@ -58,13 +58,13 @@ describe "IO#sysread on a file" do
   it "does not raise error if called after IO#read followed by IO#write" do
     @file.read(5)
     @file.write("abcde")
-    -> { @file.sysread(5) }.should_not raise_error(IOError)
+    @file.sysread(5)
   end
 
   it "does not raise error if called after IO#read followed by IO#syswrite" do
     @file.read(5)
     @file.syswrite("abcde")
-    -> { @file.sysread(5) }.should_not raise_error(IOError)
+    @file.sysread(5)
   end
 
   it "reads updated content after the flushed buffered IO#write" do

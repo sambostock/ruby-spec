@@ -86,11 +86,11 @@ describe "Numeric#step" do
 
   describe 'with keyword arguments' do
     it "doesn't raise an error when step is 0" do
-      -> { 1.step(to: 5, by: 0) { break } }.should_not raise_error
+      1.step(to: 5, by: 0) { break }
     end
 
     it "doesn't raise an error when step is 0.0" do
-      -> { 1.step(to: 2, by: 0.0) { break } }.should_not raise_error
+      1.step(to: 2, by: 0.0) { break }
     end
 
     it "should loop over self when step is 0 or 0.0" do
@@ -147,11 +147,11 @@ describe "Numeric#step" do
 
   describe 'with mixed arguments' do
     it "doesn't raise an error when step is 0" do
-      -> { 1.step(5, by: 0) { break } }.should_not raise_error
+      1.step(5, by: 0) { break }
     end
 
     it "doesn't raise an error when step is 0.0" do
-      -> { 1.step(2, by: 0.0) { break } }.should_not raise_error
+      1.step(2, by: 0.0) { break }
     end
 
     it "raises a ArgumentError when limit and to are defined" do

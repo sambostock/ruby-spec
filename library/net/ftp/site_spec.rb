@@ -28,7 +28,7 @@ describe "Net::FTP#site" do
 
   it "does not raise an error when the response code is 202" do
     @server.should_receive(:site).and_respond("202 Command not implemented, superfluous at this site.")
-    -> { @ftp.site("param") }.should_not raise_error
+    @ftp.site("param")
   end
 
   it "raises a Net::FTPPermError when the response code is 500" do

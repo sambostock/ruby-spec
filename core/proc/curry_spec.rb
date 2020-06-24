@@ -36,10 +36,10 @@ describe "Proc#curry" do
 
   it "can be called multiple times on the same Proc" do
     @proc_add.curry
-    -> { @proc_add.curry }.should_not raise_error
+    @proc_add.curry
 
     @lambda_add.curry
-    -> { @lambda_add.curry }.should_not raise_error
+    @lambda_add.curry
   end
 
   it "can be passed superfluous arguments if created from a proc" do
@@ -98,8 +98,8 @@ describe "Proc#curry with arity argument" do
   end
 
   it "accepts an optional Integer argument for the arity" do
-    -> { @proc_add.curry(3) }.should_not raise_error
-    -> { @lambda_add.curry(3) }.should_not raise_error
+    @proc_add.curry(3)
+    @lambda_add.curry(3)
   end
 
   it "returns a Proc when called on a proc" do
@@ -152,10 +152,10 @@ describe "Proc#curry with arity argument" do
 
   it "can be specified multiple times on the same Proc" do
     @proc_add.curry(2)
-    -> { @proc_add.curry(1) }.should_not raise_error
+    @proc_add.curry(1)
 
     @lambda_add.curry(3)
-    -> { @lambda_add.curry(3) }.should_not raise_error
+    @lambda_add.curry(3)
   end
 
   it "can be passed more than _arity_ arguments if created from a proc" do

@@ -759,7 +759,7 @@ describe "Module#autoload" do
     name = mock("autoload_name.rb")
     name.should_receive(:to_path).and_return("autoload_name.rb")
 
-    -> { ModuleSpecs::Autoload.autoload :Str, name }.should_not raise_error
+    ModuleSpecs::Autoload.autoload :Str, name
   end
 
   describe "on a frozen module" do

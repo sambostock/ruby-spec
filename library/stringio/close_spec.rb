@@ -18,6 +18,6 @@ describe "StringIO#close" do
 
   it "does not raise anything when self was already closed" do
     @io.close
-    -> { @io.close }.should_not raise_error(IOError)
+    @io.close
   end
 end

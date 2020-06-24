@@ -3,9 +3,9 @@ require 'ipaddr'
 
 describe "IPAddr#new" do
   it "initializes IPAddr" do
-    ->{ IPAddr.new("3FFE:505:ffff::/48") }.should_not raise_error
-    ->{ IPAddr.new("0:0:0:1::")          }.should_not raise_error
-    ->{ IPAddr.new("2001:200:300::/48")  }.should_not raise_error
+    IPAddr.new("3FFE:505:ffff::/48")
+    IPAddr.new("0:0:0:1::")
+    IPAddr.new("2001:200:300::/48")
   end
 
   it "initializes IPAddr ipv6 address with short notation" do

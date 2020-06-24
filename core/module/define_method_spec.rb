@@ -169,34 +169,35 @@ end
 
 describe "Module#define_method" do
   it "defines the given method as an instance method with the given name in self" do
-    class DefineMethodSpecClass
+    klass = Class.new do
       def test1
         "test"
       end
       define_method(:another_test, instance_method(:test1))
     end
 
-    o = DefineMethodSpecClass.new
+    o = klass.new
     o.test1.should == o.another_test
-
-    Object.send(:remove_const, :DefineMethodSpecClass)
   end
 
   it "calls #method_added after the method is added to the Module" do
-    DefineMethodSpecClass.should_receive(:method_added).with(:test_ma)
+    Klass = Class.new
+    Klass.should_receive(:method_added).with(:test_ma)
 
-    class DefineMethodSpecClass
+    class Klass
       define_method(:test_ma) { true }
     end
+  ensure
+    Object.send(:remove_const, :Klass)
   end
 
   it "defines a new method with the given name and the given block as body in self" do
-    class DefineMethodSpecClass
+    klass = Class.new do
       define_method(:block_test1) { self }
       define_method(:block_test2, &-> { self })
     end
 
-    o = DefineMethodSpecClass.new
+    o = klass.new
     o.block_test1.should == o
     o.block_test2.should == o
   end
@@ -235,12 +236,12 @@ describe "Module#define_method" do
   end
 
   it "does not change the arity check style of the original proc" do
-    class DefineMethodSpecClass
+    klass = Class.new
       prc = Proc.new { || true }
       define_method("proc_style_test", &prc)
     end
 
-    obj = DefineMethodSpecClass.new
+    obj = klass.new
     -> { obj.proc_style_test :arg }.should raise_error(ArgumentError)
   end
 
@@ -251,19 +252,19 @@ describe "Module#define_method" do
   end
 
   it "accepts a Method (still bound)" do
-    class DefineMethodSpecClass
+    klass = Class.new do
       attr_accessor :data
       def inspect_data
         "data is #{@data}"
       end
     end
-    o = DefineMethodSpecClass.new
+    o = klass.new
     o.data = :foo
     m = o.method(:inspect_data)
     m.should be_an_instance_of(Method)
-    klass = Class.new(DefineMethodSpecClass)
-    klass.send(:define_method,:other_inspect, m)
-    c = klass.new
+    subklass = Class.new(klass)
+    subklass.send(:define_method,:other_inspect, m)
+    c = subklass.new
     c.data = :bar
     c.other_inspect.should == "data is bar"
     ->{o.other_inspect}.should raise_error(NoMethodError)
@@ -296,52 +297,58 @@ describe "Module#define_method" do
   end
 
   it "accepts an UnboundMethod from an attr_accessor method" do
-    class DefineMethodSpecClass
+    class Klass
       attr_accessor :accessor_method
     end
 
-    m = DefineMethodSpecClass.instance_method(:accessor_method)
-    o = DefineMethodSpecClass.new
+    m = Klass.instance_method(:accessor_method)
+    o = Klass.new
 
-    DefineMethodSpecClass.send(:undef_method, :accessor_method)
+    Klass.send(:undef_method, :accessor_method)
     -> { o.accessor_method }.should raise_error(NoMethodError)
 
-    DefineMethodSpecClass.send(:define_method, :accessor_method, m)
+    Klass.send(:define_method, :accessor_method, m)
 
     o.accessor_method = :abc
     o.accessor_method.should == :abc
+  ensure
+    Object.send(:remove_const, :Klass)
   end
 
   it "accepts a proc from a method" do
-    class ProcFromMethod
+    class Klass
       attr_accessor :data
       def cool_method
         "data is #{@data}"
       end
     end
 
-    object1 = ProcFromMethod.new
+    object1 = Klass.new
     object1.data = :foo
 
     method_proc = object1.method(:cool_method).to_proc
-    klass = Class.new(ProcFromMethod)
+    klass = Class.new(Klass)
     klass.send(:define_method, :other_cool_method, &method_proc)
 
     object2 = klass.new
     object2.data = :bar
     object2.other_cool_method.should == "data is foo"
+  ensure
+    Object.send(:remove_const, :Klass)
   end
 
   it "maintains the Proc's scope" do
-    class DefineMethodByProcClass
+    class Klass
       in_scope = true
       method_proc = proc { in_scope }
 
       define_method(:proc_test, &method_proc)
     end
 
-    o = DefineMethodByProcClass.new
+    o = Klass.new
     o.proc_test.should be_true
+  ensure
+    Object.send(:remove_const, :Klass)
   end
 
   it "accepts a String method name" do
@@ -359,7 +366,7 @@ describe "Module#define_method" do
   end
 
   it "returns its symbol" do
-    class DefineMethodSpecClass
+    Class.new do
       method = define_method("return_test") { true }
       method.should == :return_test
     end

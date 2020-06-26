@@ -78,12 +78,75 @@ module MethodSpecs
     def two_req_one_opt_with_splat_and_block(a, b, c=nil, *d, &blk); end
     def one_req_two_opt_with_splat_and_block(a, b=nil, c=nil, *d, &blk); end
 
+    def zero_one_kw(a:); end
+    def zero_one_kw_and_block(a:, &blk); end
+    def zero_one_opt_kw(a: nil); end
+    def zero_one_opt_kw_and_block(a: nil, &blk); end
+    def zero_variadic_kw(**a); end
+    def zero_variadic_kw_and_block(**a, &blk); end
+    def zero_one_kw_variadic_kw(a:, **b); end
+    def zero_one_kw_variadic_kw_and_block(a:, **b, &blk); end
+    def zero_one_opt_kw_variadic_kw(a: nil, **b); end
+    def zero_one_opt_kw_variadic_kw_and_block(a: nil, **b, &blk); end
+    def zero_one_kw_one_opt_kw(a:, b: nil); end
+    def zero_one_kw_one_opt_kw_and_block(a:, b: nil, &blk); end
+    def zero_one_kw_one_opt_kw_variadic_kw(a:, b: nil, **c); end
+    def zero_one_kw_one_opt_kw_variadic_kw_and_block(a:, b: nil, **c, &blk); end
+
+    def ignored(*); end
+
+    ruby_version_is '2.7' do
+      def zero_no_kw(**nil); end
+      def everything(a, b, c=nil, d=nil, *e, f:, g:, h:nil, i:nil, **j, &blk); end
+      def everything_no_kw(a, b=nil, *c, **nil, &blk); end
+      def forwardable(...);end
+    end
+
     define_method(:zero_defined_method, Proc.new {||})
+    define_method(:zero_with_block_defined_method, Proc.new {|&blk|})
     define_method(:zero_with_splat_defined_method, Proc.new {|*x|})
     define_method(:one_req_defined_method, Proc.new {|x|})
     define_method(:two_req_defined_method, Proc.new {|x, y|})
+    define_method(:one_opt_defined_method, Proc.new {|x=nil|})
+    define_method(:one_req_one_opt_defined_method, Proc.new {|x, y=nil|})
+    define_method(:one_req_two_opt_defined_method, Proc.new {|x, y=nil, z=nil|})
+    define_method(:two_req_one_opt_defined_method, Proc.new {|x, y, z=nil|})
+    define_method(:one_req_with_splat_defined_method) { |x, *y| }
+    define_method(:two_req_with_splat_defined_method) { |x, y, *z| }
     define_method(:no_args_defined_method) {}
     define_method(:two_grouped_defined_method) {|(_x1,_x2)|}
+    define_method(:double_two_grouped_defined_method) {|(_x1,_x2), (_y1, _y2)|}
+
+    ruby_version_is '2.7' do
+      define_method(:single_numeric_parameter_defined_method) { _1 }
+      define_method(:double_numeric_parameter_defined_method) { _1 + _2 }
+    end
+
+    define_method(:zero_one_kw_defined_method) { |x:| }
+    define_method(:zero_one_kw_and_block_defined_method) { |x:, &blk| }
+    define_method(:zero_one_opt_kw_defined_method) { |x: nil| }
+    define_method(:zero_one_opt_kw_and_block_defined_method) { |x: nil, &blk| }
+    define_method(:zero_one_kw_one_opt_kw_defined_method) { |x:, y: nil| }
+    define_method(:zero_one_kw_one_opt_kw_and_block_defined_method) { |x:, y: nil, &blk| }
+    define_method(:zero_variadic_kw_defined_method) { |**x| }
+    define_method(:zero_variadic_kw_and_block_defined_method) { |**x, &blk| }
+    define_method(:zero_one_kw_variadic_kw_defined_method) { |x:, **y| }
+    define_method(:zero_one_kw_variadic_kw_and_block_defined_method) { |x:, **y, &blk| }
+    define_method(:zero_one_opt_kw_variadic_kw_defined_method) { |x: nil, **y| }
+    define_method(:zero_one_opt_kw_variadic_kw_and_block_defined_method) { |x: nil, **y, &blk| }
+    define_method(:zero_one_kw_one_opt_kw_variadic_kw_defined_method) { |x:, y: nil, **z| }
+    define_method(:zero_one_kw_one_opt_kw_variadic_kw_and_block_defined_method) { |x:, y: nil, **z, &blk| }
+
+    ruby_version_is '2.7' do
+      define_method(:zero_no_kw_defined_method) { |**nil| }
+      define_method(:zero_no_kw_defined_method_and_block) { |**nil, &blk| }
+    end
+
+    define_method(:ignored_defined_method) { |*| }
+
+    ruby_version_is '2.7' do
+      # define_method(:forwardable_defined_method) { |...| }
+    end
 
     attr_reader :reader
     attr_writer :writer

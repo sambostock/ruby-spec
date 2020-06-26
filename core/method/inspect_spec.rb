@@ -4,52 +4,109 @@ require_relative 'shared/to_s'
 describe "Method#inspect" do
   it_behaves_like :method_to_s, :inspect
 
-  it "has be updated in 2.7" do
-    {
-      'attr=': '_',
-      'writer=': '_',
-      bar: 'foo)(', # FIXME: This is an alias. Need to change helper.
-      baz: 'foo)(', # FIXME: This is also an alias. Need to change helper.
-      foo: '',
-      method_missing: 'method, *arguments',
-      no_args_defined_method: '',
-      one_opt: 'a=...',
-      one_opt_with_block: 'a=..., &blk',
-      one_req: 'a',
-      one_req_defined_method: 'x',
-      one_req_one_opt: 'a, b=...',
-      one_req_one_opt_with_block: 'a, b=..., &blk',
-      one_req_one_opt_with_splat: 'a, b=..., *c',
-      one_req_one_opt_with_splat_and_block: 'a, b=..., *c, &blk',
-      one_req_two_opt: 'a, b=..., c=...',
-      one_req_two_opt_with_block: 'a, b=..., c=..., &blk',
-      one_req_two_opt_with_splat: 'a, b=..., c=..., *d',
-      one_req_two_opt_with_splat_and_block: 'a, b=..., c=..., *d, &blk',
-      one_req_with_block: 'a, &blk',
-      one_req_with_splat: 'a, *b',
-      one_req_with_splat_and_block: 'a, *b, &blk',
-      reader: '',
-      same_as_foo: '',
-      two_grouped_defined_method: '_',
-      two_req: 'a, b',
-      two_req_defined_method: 'x, y',
-      two_req_one_opt: 'a, b, c=...',
-      two_req_one_opt_with_block: 'a, b, c=..., &blk',
-      two_req_one_opt_with_splat: 'a, b, c=..., *d',
-      two_req_one_opt_with_splat_and_block: 'a, b, c=..., *d, &blk',
-      two_req_with_block: 'a, b, &blk',
-      two_req_with_splat: 'a, b, *c',
-      two_req_with_splat_and_block: 'a, b, *c, &blk',
-      zero: '',
-      zero_defined_method: '',
-      zero_with_block: '&blk',
-      zero_with_splat: '*a',
-      zero_with_splat_and_block: '*a, &blk',
-      zero_with_splat_defined_method: '*x',
-    }.each do |method_name, args_description|
+  ruby_version_is '2.7' do
+    it 'displays implicit parameters as underscores' do
+      should_inspect 'attr=(_)'
+      should_inspect 'writer=(_)'
+      should_inspect 'two_grouped_defined_method(_)'
+      should_inspect 'double_two_grouped_defined_method(_, _)'
+    end
+
+    it 'includes original method name when aliased' do
+      should_inspect 'foo()'
+      should_inspect 'bar(foo)()'
+      should_inspect 'baz(foo)()'
+    end
+
+    it 'displays empty parameters as empty parens' do
+      should_inspect 'foo()'
+      should_inspect 'reader()'
+      should_inspect 'zero()'
+      should_inspect 'zero_defined_method()'
+    end
+
+    it 'displays required positional parameters as their name' do
+      should_inspect 'one_req(a)'
+      should_inspect 'one_req_defined_method(x)'
+      should_inspect 'two_req(a, b)'
+      should_inspect 'two_req_defined_method(x, y)'
+      should_inspect 'single_numeric_parameter_defined_method(_1)'
+      should_inspect 'double_numeric_parameter_defined_method(_1, _2)'
+    end
+
+    it 'displays optional positional parameters with an ellipsis' do
+      should_inspect 'one_opt(a=...)'
+      should_inspect 'one_req_one_opt(a, b=...)'
+      should_inspect 'one_req_two_opt(a, b=..., c=...)'
+      should_inspect 'two_req_one_opt(a, b, c=...)'
+      should_inspect 'one_opt_defined_method(x=...)'
+      should_inspect 'one_req_one_opt_defined_method(x, y=...)'
+      should_inspect 'one_req_two_opt_defined_method(x, y=..., z=...)'
+      should_inspect 'two_req_one_opt_defined_method(x, y, z=...)'
+    end
+
+    it 'displays variadic positional parameters with an asterisk' do
+      should_inspect 'zero_with_splat(*a)'
+      should_inspect 'one_req_with_splat(a, *b)'
+      should_inspect 'two_req_with_splat(a, b, *c)'
+      should_inspect 'zero_with_splat_defined_method(*x)'
+      should_inspect 'one_req_with_splat_defined_method(x, *y)'
+      should_inspect 'two_req_with_splat_defined_method(x, y, *z)'
+    end
+
+    it 'displays required keyword parameters with leading colon' do
+      should_inspect 'zero_one_kw(a:)'
+      should_inspect 'zero_one_kw_defined_method(x:)'
+    end
+
+    it 'displays optional rd parameters with leading colon and ellipsis' do
+      should_inspect 'zero_one_opt_kw(a: ...)'
+      should_inspect 'zero_one_kw_one_opt_kw(a:, b: ...)'
+      should_inspect 'zero_one_opt_kw_defined_method(x: ...)'
+      should_inspect 'zero_one_kw_one_opt_kw_defined_method(x:, y: ...)'
+    end
+
+    it 'displays variadic keyword parameters with double asterisks' do
+      should_inspect 'zero_variadic_kw(**a)'
+      should_inspect 'zero_one_kw_variadic_kw(a:, **b)'
+      should_inspect 'zero_one_opt_kw_variadic_kw(a: ..., **b)'
+      should_inspect 'zero_one_kw_one_opt_kw_variadic_kw(a:, b: ..., **c)'
+      should_inspect 'zero_variadic_kw_defined_method(**x)'
+      should_inspect 'zero_one_kw_variadic_kw_defined_method(x:, **y)'
+      should_inspect 'zero_one_opt_kw_variadic_kw_defined_method(x: ..., **y)'
+      should_inspect 'zero_one_kw_one_opt_kw_variadic_kw_defined_method(x:, y: ..., **z)'
+    end
+
+    it 'displays block parameters with ampersand' do
+      should_inspect 'zero_with_block(&blk)'
+      should_inspect 'zero_with_block_defined_method(&blk)'
+    end
+
+    it 'displays ignored parameters as a single asterisk' do
+      should_inspect 'ignored(*)'
+      should_inspect 'ignored_defined_method(*)'
+    end
+
+    it 'displays forwardable parameters as an ellipsis' do
+      should_inspect 'forwardable(...)'
+      # should_inspect 'forwardable_defined_method(...)' # FIXME: Not supported
+    end
+
+    it 'displays forbidden keywords as double asterisk nil' do
+      should_inspect 'zero_no_kw(**nil)'
+      should_inspect 'zero_no_kw_defined_method(**nil)'
+    end
+
+    it 'displays combinations of parameters correctly' do
+      should_inspect 'everything(a, b, c=..., d=..., *e, f:, g:, h: ..., i: ..., **j, &blk)'
+      should_inspect 'everything_no_kw(a, b=..., *c, **nil, &blk)'
+    end
+
+    def should_inspect(signature)
+      method_name = signature.split('(').first
       method = MethodSpecs::Methods.new.method(method_name)
-      inspect = "#<Method: MethodSpecs::Methods##{method_name}(#{args_description}) #{method.source_location.join(':')}>"
-      # binding.irb
+
+      inspect = "#<Method: MethodSpecs::Methods##{signature} #{method.source_location.join(':')}>"
 
       method.inspect.should == inspect
     end
